@@ -1,3 +1,4 @@
+// The aim of this go code is to get familiar with variable definitions in GoLang
 package main
 
 import (

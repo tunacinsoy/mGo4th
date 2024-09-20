@@ -46,6 +46,9 @@ func main() {
 		}
 
 		// Is it executable?
+		// Why 0111, what that is?
+		// Since it starts with 0, 0111 is in octal format, so its representation is: 001 001 001, and all of these segments correspond to rwx (owner, group, other)
+		// Then, when we AND it with mode, which is (111 101 101), the result becomes: (001 001 001), which is not zero. So, this binary is executable.
 		if mode&0111 != 0 {
 			fmt.Println(fullPath)
 			return

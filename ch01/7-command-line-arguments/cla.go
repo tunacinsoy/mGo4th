@@ -1,3 +1,4 @@
+// The aim of this program is to get familiar with the os.Args slice.
 package main
 
 import (
@@ -7,16 +8,21 @@ import (
 )
 
 func main() {
+
 	arguments := os.Args
+
 	if len(arguments) == 1 {
-		fmt.Println("Need one or more arguments!")
-		return
+		fmt.Printf("You need to provide a command line argument.\n")
+		os.Exit(1)
 	}
 
-	var min, max float64
-    var initialized = 0
+	var min float64
+	var max float64
+	var initialized uint8
+
 	for i := 1; i < len(arguments); i++ {
 		n, err := strconv.ParseFloat(arguments[i], 64)
+
 		if err != nil {
 			continue
 		}
@@ -24,18 +30,17 @@ func main() {
 		if initialized == 0 {
 			min = n
 			max = n
-            initialized = 1
-			continue
+			initialized = 1
 		}
 
 		if n < min {
 			min = n
-		}
-		if n > max {
+		} else if n > max {
 			max = n
 		}
+
 	}
 
-	fmt.Println("Min:", min)
-	fmt.Println("Max:", max)
+	fmt.Printf("The min value: %.1f\n", min)
+	fmt.Printf("The max value: %.1f\n", max)
 }

@@ -1,3 +1,5 @@
+// The aim of this program is to get familiar with sorting slices in both ascending/descending order.
+
 package main
 
 import (
@@ -12,7 +14,7 @@ func main() {
 
 	fmt.Println("sInts original:", sInts)
 	sort.Ints(sInts)
-	fmt.Println("sInts:", sInts)
+	fmt.Println("sInts after sort:", sInts)
 	sort.Sort(sort.Reverse(sort.IntSlice(sInts)))
 	fmt.Println("Reverse:", sInts)
 
@@ -27,4 +29,5 @@ func main() {
 	fmt.Println("sStrings:", sStrings)
 	sort.Sort(sort.Reverse(sort.StringSlice(sStrings)))
 	fmt.Println("Reverse:", sStrings)
+
 }

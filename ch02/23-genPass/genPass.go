@@ -1,3 +1,4 @@
+// The aim of this program is to utilize random number generation to generate strong passwords
 package main
 
 import (
@@ -11,16 +12,17 @@ import (
 var MIN = 0
 var MAX = 94
 
-func random(min, max int) int {
-	return rand.Intn(max-min) + min
+func random(min int, max int, r *rand.Rand) int {
+	return r.Intn(max-min) + min
 }
 
-func getString(len int64) string {
+func getString(len int64, r *rand.Rand) string {
 	temp := ""
 	startChar := "!"
 	var i int64 = 1
 	for {
-		myRand := random(MIN, MAX)
+		myRand := random(MIN, MAX, r)
+		// fmt.Printf("Type of myRand is: %T\n", myRand)
 		newChar := string(startChar[0] + byte(myRand))
 		temp = temp + newChar
 		if i == len {
@@ -48,7 +50,10 @@ func main() {
 		fmt.Println("Using default values...")
 	}
 
-	SEED := time.Now().Unix()
-	rand.Seed(SEED)
-	fmt.Println(getString(LENGTH))
+	r := rand.New(rand.NewSource(time.Now().Unix()))
+
+	//SEED := time.Now().Unix()
+	//rand.Seed(SEED)
+	fmt.Println(getString(LENGTH, r))
+
 }

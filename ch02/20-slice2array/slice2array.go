@@ -1,3 +1,4 @@
+// The aim of this program is to understand slice to array pointer and slice to array casting
 package main
 
 import "fmt"

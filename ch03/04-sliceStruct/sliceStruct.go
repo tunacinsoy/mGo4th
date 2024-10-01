@@ -24,9 +24,16 @@ func main() {
 
 	sum := 0
 
-	for i, _ := range s {
+	for i := range s {
 		sum += s[i].Field1
 	}
 
 	fmt.Println("Sum:", sum)
+
+	txt := ""
+	for i := range s {
+		txt += s[i].Field2
+	}
+
+	fmt.Println(txt)
 }

@@ -1,3 +1,4 @@
+// The aim of this program is to read data from csv and store it into another file
 package main
 
 import (
@@ -25,28 +26,29 @@ func readCSVFile(filepath string) ([][]string, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer f.Close()
 
-	// CSV file read all at once
-	// lines is a [][]string variable
 	lines, err := csv.NewReader(f).ReadAll()
+
 	if err != nil {
 		return [][]string{}, err
 	}
-
+	//fmt.Printf("lines[0]: %s \n", lines[0])
 	return lines, nil
 }
 
 func saveCSVFile(filepath string) error {
+
+	// If the file already exists, it will be opened, but its contents will be cleared (truncated) to a size of 0 bytes.
 	csvfile, err := os.Create(filepath)
 	if err != nil {
 		return err
 	}
 	defer csvfile.Close()
-
 	csvwriter := csv.NewWriter(csvfile)
-	// Changing the default field delimiter to tab
 	csvwriter.Comma = '\t'
+
 	for _, row := range myData {
 		temp := []string{row.Name, row.Surname, row.Number, row.LastAccess}
 		err = csvwriter.Write(temp)
@@ -72,8 +74,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	// CSV data is read in columns - each line is a slice
+	// lines is 2D string slice
+	// line variable represents each line in lines 2d slice
 	for _, line := range lines {
+		//fmt.Printf("line[0]: %v\n", line[0]) // Prints out the names
 		temp := Record{
 			Name:       line[0],
 			Surname:    line[1],

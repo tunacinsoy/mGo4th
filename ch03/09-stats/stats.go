@@ -1,3 +1,5 @@
+// The aim of this program is to enhance the existing stats program by incorporating readFile utility from a CSV file
+
 package main
 
 import (
@@ -15,19 +17,28 @@ func readFile(filepath string) ([]float64, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	f, err := os.Open(filepath)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
+
+	// This function might throw an error if each line in data file does not contain
+	// same number of fields. for instance,
+	// line 1 -> 1.1,2
+	// line 2 -> 2
+	// would cause an error due the difference between line 1 and line 2 in terms of value counts.
 	lines, err := csv.NewReader(f).ReadAll()
+	fmt.Printf("Type of lines: %T\n", lines)
+	fmt.Printf("lines: %v\n", lines)
 	if err != nil {
 		return nil, err
 	}
+	//Create a float64 slice with size 0 and capacity 0
+	values := make([]float64, 0, 0)
 
-	values := make([]float64, 0)
 	for _, line := range lines {
+		fmt.Println("len(line)", len(line))
 		tmp, err := strconv.ParseFloat(line[0], 64)
 		if err != nil {
 			log.Println("Error reading:", line[0], err)
@@ -42,19 +53,20 @@ func readFile(filepath string) ([]float64, error) {
 func stdDev(x []float64) (float64, float64) {
 	sum := 0.0
 	for _, val := range x {
-		sum = sum + val
+		sum += val
 	}
-
+	// Mean value
 	meanValue := sum / float64(len(x))
-	fmt.Printf("Mean value: %.5f\n", meanValue)
+	fmt.Printf("Mean value is: %.3f\n", meanValue)
+	// Std devation
+	var squaredSum float64
 
-	// Standard deviation
-	var squared float64
-	for i := 0; i < len(x); i++ {
-		squared = squared + math.Pow((x[i]-meanValue), 2)
+	for _, val := range x {
+		squaredSum += math.Pow(meanValue-val, 2)
 	}
 
-	standardDeviation := math.Sqrt(squared / float64(len(x)))
+	var standardDeviation float64 = math.Sqrt(squaredSum / float64(len(x)))
+
 	return meanValue, standardDeviation
 }
 
@@ -72,6 +84,7 @@ func normalize(data []float64, mean float64, stdDev float64) []float64 {
 }
 
 func main() {
+
 	if len(os.Args) == 1 {
 		log.Println("Need one argument!")
 		return

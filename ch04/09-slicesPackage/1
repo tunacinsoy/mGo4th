@@ -1,0 +1,12 @@
+-1 -1 -1
+0 -1 -1
+[1 2 0 0]
+s1 (compact): [1 2 0]
+true false
+[0 0 0 0 0 0 0 0 0 0]
+Len: 10 Cap: 100
+Len: 10 Cap: 10
+Min: 0 Max: 2
+s2 before operations [1 2 -1 -2]
+s2 (replaced): [1 100 200 300 -2]
+s2 sorted: [-2 1 100 200 300]

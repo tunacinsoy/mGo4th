@@ -1,8 +1,9 @@
+// The aim of this program is to get familiar with new datatype declaration for generic functions
 package main
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 )
 
 type TreeLast[T any] []T
@@ -11,12 +12,13 @@ func (t TreeLast[T]) replaceLast(element T) (TreeLast[T], error) {
 	if len(t) == 0 {
 		return t, errors.New("This is empty!")
 	}
-	
-	t[len(t) - 1] = element
+
+	t[len(t)-1] = element
 	return t, nil
 }
 
 func main() {
+
 	tempStr := TreeLast[string]{"aa", "bb"}
 	fmt.Println(tempStr)
 	tempStr.replaceLast("cc")
@@ -26,4 +28,5 @@ func main() {
 	fmt.Println(tempInt)
 	tempInt.replaceLast(0)
 	fmt.Println(tempInt)
+
 }

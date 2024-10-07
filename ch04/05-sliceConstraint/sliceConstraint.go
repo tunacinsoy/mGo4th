@@ -1,8 +1,7 @@
+// The aim of this program is to understand slice constraints for generic functions
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func f1[S interface{ ~[]E }, E interface{}](x S) int {
 	return len(x)

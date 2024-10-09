@@ -1,3 +1,4 @@
+// The aim of this program is to get familiar with type methods
 package main
 
 import (

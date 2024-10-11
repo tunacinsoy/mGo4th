@@ -7,13 +7,20 @@ import (
 	"os"
 )
 
+type Record struct {
+	flag bool
+	sli1 []string
+	map1 map[string]string
+	str1 string
+}
+
 var JSONrecord = `{
 	"Flag": true,
 	"Array": ["a","b","c"],
 	"Entity": {
 		"a1": "b1",
 		"a2": "b2",
-		"Value": -456,
+		"Value": "-456",
 		"Null": null
 	},
 	"Message": "Hello Go!"

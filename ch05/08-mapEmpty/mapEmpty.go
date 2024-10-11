@@ -1,3 +1,4 @@
+// The aim of this program is to deal with data that its type is unknown using interface{}
 package main
 
 import (
@@ -10,13 +11,13 @@ var JSONrecord = `{
 	"Flag": true,
 	"Array": ["a","b","c"],
 	"Entity": {
-	  "a1": "b1",
-	  "a2": "b2",
-	  "Value": -456,
-	  "Null": null
+		"a1": "b1",
+		"a2": "b2",
+		"Value": -456,
+		"Null": null
 	},
 	"Message": "Hello Go!"
-  }`
+}`
 
 func typeSwitch(m map[string]interface{}) {
 	for k, v := range m {
@@ -52,18 +53,26 @@ func exploreMap(m map[string]interface{}) {
 }
 
 func main() {
+
 	if len(os.Args) == 1 {
-		fmt.Println("*** Using default JSON record.")
+		fmt.Println("Using def json record.")
 	} else {
 		JSONrecord = os.Args[1]
 	}
 
+	// map[string]interface{} is extremely handy for storing JSON records when you do not know
+	// their schema in advance. In other words, map[string]interface{} is good at storing arbitrary
+	// JSON data of unknown schema.
 	JSONMap := make(map[string]interface{})
+
 	err := json.Unmarshal([]byte(JSONrecord), &JSONMap)
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	exploreMap(JSONMap)
 	typeSwitch(JSONMap)
+
 }

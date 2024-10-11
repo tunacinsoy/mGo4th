@@ -1,6 +1,0 @@
-type of: int and val: 12
-Type assertion failed in string!
-Type assertion successful for int: 12
-13
-Type assertion failed for int64!
-i: 12

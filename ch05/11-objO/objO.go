@@ -1,3 +1,9 @@
+// The aim of this program is to get familiar with OOP concepts.
+// Covered OOP concepts are:
+// Encapsulation: Bundling fields and methods within structs a, b, and c.
+// Inheritance: Achieved via embedding and composition (e.g., compose struct embedding a).
+// Polymorphism: Demonstrated through interface-based polymorphism with IntA, IntB, and IntC.
+// Abstraction: Using interfaces IntA and IntB to hide implementation details and expose only necessary behavior.
 package main
 
 import "fmt"

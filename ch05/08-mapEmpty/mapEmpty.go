@@ -4,18 +4,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"os"
 )
 
-type Record struct {
-	flag bool
-	sli1 []string
-	map1 map[string]string
-	str1 string
-}
-
 var JSONrecord = `{
 	"Flag": true,
+	"Integer1": 2,
+	"Float1": 3.4,
 	"Array": ["a","b","c"],
 	"Entity": {
 		"a1": "b1",
@@ -45,7 +41,9 @@ func typeSwitch(m map[string]interface{}) {
 	return
 }
 
+// the input parameter looks confusing, but it means that i know that i will receive a map that contains string type of keys, however I am not sure about the data types of values.W
 func exploreMap(m map[string]interface{}) {
+
 	for k, v := range m {
 		embMap, ok := v.(map[string]interface{})
 		// If it is a map, explore deeper
@@ -57,6 +55,62 @@ func exploreMap(m map[string]interface{}) {
 			fmt.Printf("%v: %v\n", k, v)
 		}
 	}
+}
+
+func hasDecimal(f interface{}) bool {
+	v, ok := f.(float64)
+	if ok {
+		_, frac := math.Modf(v)
+		if frac == 0 {
+			return false
+		} else {
+			return true
+		}
+	}
+	return false
+}
+
+// Analyzes and returns the count of each data type of a json record
+func analyzeMap(m map[string]interface{}) {
+
+	var counterMap int = 0
+	var counterInt int = 0
+	var counterFloat64 int = 0
+	var counterString int = 0
+	var counterBool int = 0
+	var counterSlice int = 0
+	for _, v := range m {
+
+		switch T := v.(type) {
+		case map[string]interface{}:
+			counterMap++
+		case int:
+			// Somehow it does not fall into this case, this part will be handled in float64 case
+			counterInt++
+		case float64:
+			if hasDecimal(v) {
+				counterFloat64++
+			} else {
+				counterInt++
+			}
+		case string:
+			counterString++
+		case bool:
+			counterBool++
+		case []interface{}:
+			counterSlice++
+		default:
+			fmt.Printf("Not supported type: %T\n", T)
+		}
+	}
+
+	fmt.Printf("Analysis Results:\n")
+	fmt.Printf("\t Count of maps: %d\n", counterMap)
+	fmt.Printf("\t Count of ints: %d\n", counterInt)
+	fmt.Printf("\t Count of floats: %d\n", counterFloat64)
+	fmt.Printf("\t Count of strings: %d\n", counterString)
+	fmt.Printf("\t Count of bools: %d\n", counterBool)
+	fmt.Printf("\t Count of slice: %d\n", counterSlice)
 }
 
 func main() {
@@ -79,7 +133,8 @@ func main() {
 		return
 	}
 
-	exploreMap(JSONMap)
-	typeSwitch(JSONMap)
+	analyzeMap(JSONMap)
+	// exploreMap(JSONMap)
+	// typeSwitch(JSONMap)
 
 }

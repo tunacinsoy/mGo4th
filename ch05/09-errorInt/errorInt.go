@@ -13,6 +13,8 @@ type emptyFile struct {
 	Read  int
 }
 
+// When readFile returns emptyFile, that custom type implements the error interface because it has a Error() string method.
+// This allows the value of type emptyFile to be stored in a variable of type error.
 func (e emptyFile) Error() string {
 	return fmt.Sprintf("Ended with io.EOF (%v) but read (%d) bytes", e.Ended, e.Read)
 }

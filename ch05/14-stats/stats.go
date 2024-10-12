@@ -1,3 +1,4 @@
+// The aim of this program is to introduce custom sort behavior to statistics app
 package main
 
 import (
@@ -70,38 +71,43 @@ type DataFile struct {
 type DFslice []DataFile
 
 // Implement sort.Interface
+// Why? Because we would like to sort our fields according to their mean values,
+// which is a custom behavior.
 func (a DFslice) Len() int {
 	return len(a)
 }
-
-func (a DFslice) Less(i, j int) bool {
+func (a DFslice) Less(i int, j int) bool {
 	return a[i].Mean < a[j].Mean
 }
-
-func (a DFslice) Swap(i, j int) {
+func (a DFslice) Swap(i int, j int) {
 	a[i], a[j] = a[j], a[i]
 }
 
 func main() {
+
 	if len(os.Args) == 1 {
-		fmt.Println("Need one or more file paths!")
+		fmt.Println("Please provide file paths.")
 		return
 	}
 
-	// Slice of DataFile structures
 	files := DFslice{}
+	// another definition
+	// files1 := []DataFile{}
 
-	for i := 1; i < len(os.Args); i++ {
-		file := os.Args[i]
+	os.Args = os.Args[1:]
+
+	for _, filename := range os.Args {
 		currentFile := DataFile{}
-		currentFile.Filename = file
+		currentFile.Filename = filename
 
-		values, err := readFile(file)
+		values, err := readFile(filename)
+
 		if err != nil {
-			fmt.Println("Error reading:", file, err)
-			os.Exit(0)
+			fmt.Println("Error reading: ", filename, err)
+			os.Exit(1)
 		}
 
+		currentFile.Len = len(values)
 		currentFile.Len = len(values)
 		currentFile.Minimum = slices.Min(values)
 		currentFile.Maximum = slices.Max(values)
@@ -112,10 +118,20 @@ func main() {
 		files = append(files, currentFile)
 	}
 
-	// Now sort files
 	sort.Sort(files)
+
 	for _, val := range files {
 		f := val.Filename
-		fmt.Println(f,":",val.Len,val.Mean,val.Maximum,val.Minimum)
+		fmt.Println(f, ":", val.Len, val.Mean, val.Maximum, val.Minimum)
 	}
+
+	// go run stats.go d1.txt d2.txt d3.txt
+	// OUTPUTS
+	// Mean value: 3.00000
+	// Mean value: 18.20000
+	// Mean value: 0.75000
+	// d3.txt : 4 0.75 102 -300
+	// d1.txt : 5 3 5 1
+	// d2.txt : 5 18.2 100 -4
+
 }

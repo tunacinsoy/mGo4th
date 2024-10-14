@@ -1,0 +1,5 @@
+func(int) int
+func(int) int, 0x490d40
+j 0x490d40 10
+100
+-20

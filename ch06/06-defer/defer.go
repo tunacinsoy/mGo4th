@@ -22,7 +22,9 @@ func d2() {
 }
 
 func d3() {
+
 	for i := 3; i > 0; i-- {
+		// Passing i as function argument
 		defer func(n int) {
 			fmt.Printf("d3: %v ", n)
 		}(i)

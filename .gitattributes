@@ -1,9 +1,3 @@
 $ cat .gitattributes
-*.go linguist-language=Go
-*.md linguist-documentation
-*.txt linguist-vendored
-*.log linguist-vendored
-*.json linguist-vendored
-*.sql linguist-vendored
-*.sh linguist-vendored
-*.db linguist-vendored
+*.* linguist-language=Go
+

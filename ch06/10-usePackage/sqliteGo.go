@@ -1,6 +1,4 @@
-// INFO: Since this program uses an external package, this file should be located under ~/go/src folder.
-// In my case, its path is: ~/go/src/github.com/tunacinsoy/usePackage
-// After that, user should run `go mod init` and `go mod tidy` to initialize go.mod and go.sum files.
+// User should run `go mod init` and `go mod tidy` to initialize go.mod and go.sum files.
 
 // This program also assumes that tables `Users` and `Userdata` are already generated, so before running this program, user should run:
 // `sqlite3 ch06.db`

@@ -1,2 +1,2 @@
 $ cat .gitattributes
-*.go linguist-language=Go
+*.* linguist-language=Go

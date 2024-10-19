@@ -1,2 +1,1 @@
 *.go linguist-language=Go
-*.roff linguist-vendored

@@ -1,3 +1,7 @@
+/*
+The aim of this program is to learn read file line-by-line using bufio (buffered I/O) package.
+*/
+
 package main
 
 import (
@@ -15,8 +19,11 @@ func lineByLine(file string) error {
 	defer f.Close()
 
 	r := bufio.NewReader(f)
+
 	for {
 		line, err := r.ReadString('\n')
+
+		// If we reach the end of file, we'll get into following if block
 		if err == io.EOF {
 			if len(line) != 0 {
 				fmt.Println(line)
@@ -35,8 +42,9 @@ func lineByLine(file string) error {
 
 func main() {
 	args := os.Args
+
 	if len(args) == 1 {
-		fmt.Printf("usage: byLine <file1> [<file2> ...]\n")
+		fmt.Println("Provide a file path.")
 		return
 	}
 

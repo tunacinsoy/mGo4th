@@ -4,7 +4,7 @@ using package viper.
 
 Usage:
 
-	// If go.mod and go.sum files are not there then run these first:
+	// If go.mod and go.sum files do not exist where this program resides, then run these first:
 	`go mod init <module_name>`
 	`go mod tidy`
 

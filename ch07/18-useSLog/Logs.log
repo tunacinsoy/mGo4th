@@ -1,0 +1,7 @@
+{"time":"2024-11-13T21:19:36.411491009+01:00","level":"ERROR","msg":"Error message in JSON."}
+{"time":"2024-11-13T21:19:36.411626414+01:00","level":"INFO","msg":"Info message in JSON."}
+{"time":"2024-11-13T21:19:36.411632024+01:00","level":"WARN","msg":"Warning message in JSON."}
+{"time":"2024-11-13T21:21:15.536094658+01:00","level":"ERROR","msg":"Error message in JSON."}
+{"time":"2024-11-13T21:21:15.536242997+01:00","level":"DEBUG","msg":"Debug message in JSON."}
+{"time":"2024-11-13T21:21:15.536249559+01:00","level":"INFO","msg":"Info message in JSON."}
+{"time":"2024-11-13T21:21:15.53625562+01:00","level":"WARN","msg":"Warning message in JSON."}

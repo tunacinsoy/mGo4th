@@ -34,7 +34,7 @@ func main() {
 		Level: logLevel,
 	}
 
-	logJSON := slog.New(slog.NewJSONHandler(logFile, opts))
+	logJSON := slog.New(slog.NewJSONHandler(logFile, opts)) // we can also set (os.Stderr, opts) to output only to stderr
 	logLevel.Set(slog.LevelDebug)
 
 	logJSON.Error("Error message in JSON.")

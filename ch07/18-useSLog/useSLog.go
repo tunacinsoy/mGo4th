@@ -1,6 +1,7 @@
 /*
 The aim of this program is to use slog package to write logs to a log file in JSON format.
 We did this to be able to retrieve the logs for later use, since they are in format that we can decode using encoding/json package.
+This can be very handy if we want to store log entries in a regular or a time series database for further processing, visualization, or data analysis.
 */
 package main
 
